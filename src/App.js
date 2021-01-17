@@ -36,8 +36,10 @@ function App() {
     // console.log("Handpose model loaded.");
     //  Loop and detect hands
     setInterval(() => {
-      detect(net);
-    }, 10);
+      if (emoji == null) {
+        detect(net);
+      }
+    });
   };
 
   const detect = async (net) => {
@@ -62,11 +64,13 @@ function App() {
 
       // Make Detections
       const hand = await net.estimateHands(video);
-      // console.log(hand);
+      if (hand.length > 0 && hand[0].handInViewConfidence > 0.99999) {
+        console.log(hand[0].handInViewConfidence);
+      }
 
       ///////// NEW STUFF ADDED GESTURE HANDLING
 
-      if (hand.length > 0) {
+      if (hand.length > 0 && hand[0].handInViewConfidence > 0.99999) {
         const GE = new fp.GestureEstimator([
           fp.Gestures.VictoryGesture,
           fp.Gestures.ThumbsUpGesture,
@@ -81,17 +85,20 @@ function App() {
           const maxConfidence = confidence.indexOf(
             Math.max.apply(null, confidence)
           );
-          // console.log(gesture.gestures[maxConfidence].name);
-          setEmoji(gesture.gestures[maxConfidence].name);
-          // console.log(emoji);
+          if (gesture.gestures[maxConfidence].name == "thumbs_up" && confidence > 4) {
+            setEmoji("thumbs_up");
+          } 
+          if (gesture.gestures[maxConfidence].name == "victory" && confidence > 4) {
+            setEmoji("victory");
+          }
         }
       }
 
       ///////// NEW STUFF ADDED GESTURE HANDLING
 
       // Draw mesh
-      // const ctx = canvasRef.current.getContext("2d");
-      // drawHand(hand, ctx);
+      const ctx = canvasRef.current.getContext("2d");
+      drawHand(hand, ctx);
     }
   };
 
