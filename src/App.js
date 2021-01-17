@@ -64,9 +64,9 @@ function App() {
 
       // Make Detections
       const hand = await net.estimateHands(video);
-      if (hand.length > 0 && hand[0].handInViewConfidence > 0.99999) {
-        console.log(hand[0].handInViewConfidence);
-      }
+      // if (hand.length > 0 && hand[0].handInViewConfidence > 0.99999) {
+      //   console.log(hand[0].handInViewConfidence);
+      // }
 
       ///////// NEW STUFF ADDED GESTURE HANDLING
 
