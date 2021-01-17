@@ -33,7 +33,7 @@ function App() {
 
   const runHandpose = async () => {
     const net = await handpose.load();
-    console.log("Handpose model loaded.");
+    // console.log("Handpose model loaded.");
     //  Loop and detect hands
     setInterval(() => {
       detect(net);
@@ -83,15 +83,15 @@ function App() {
           );
           // console.log(gesture.gestures[maxConfidence].name);
           setEmoji(gesture.gestures[maxConfidence].name);
-          console.log(emoji);
+          // console.log(emoji);
         }
       }
 
       ///////// NEW STUFF ADDED GESTURE HANDLING
 
       // Draw mesh
-      const ctx = canvasRef.current.getContext("2d");
-      drawHand(hand, ctx);
+      // const ctx = canvasRef.current.getContext("2d");
+      // drawHand(hand, ctx);
     }
   };
 
