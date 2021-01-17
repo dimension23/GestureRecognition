@@ -85,10 +85,10 @@ function App() {
           const maxConfidence = confidence.indexOf(
             Math.max.apply(null, confidence)
           );
-          if (gesture.gestures[maxConfidence].name == "thumbs_up" && confidence > 4) {
+          if (gesture.gestures[maxConfidence].name === "thumbs_up" && confidence > 4) {
             setEmoji("thumbs_up");
           } 
-          if (gesture.gestures[maxConfidence].name == "victory" && confidence > 4) {
+          if (gesture.gestures[maxConfidence].name === "victory" && confidence > 4) {
             setEmoji("victory");
           }
         }
